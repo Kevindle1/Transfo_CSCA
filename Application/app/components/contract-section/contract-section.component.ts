@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Client } from '../../models/client.model';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr'; 
-import { APP_CONFIG } from 'src/app/app-config';
+import { APP_CONFIG } from '../../app-config';
 
 @Component({
   selector: 'app-contract-section',
