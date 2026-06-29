@@ -1,21 +1,57 @@
-
-.footer{
+.footer {
     background-color: #308276;
-    bottom: 0;
     color: #f4f4f4;
-    left: 0;
     position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 14px 20px;
     text-align: center;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.Documentations {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 12px 32px;
+    margin-bottom: 8px;
+}
+
+.Documentations a {
+    position: relative;
+    text-decoration: none;
+    color: #f4f4f4;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 4px 2px;
+    transition: opacity 0.2s ease;
+}
+
+/* Soulignement animé au survol */
+.Documentations a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: #f4f4f4;
+    transition: width 0.25s ease;
+}
+
+.Documentations a:hover {
+    opacity: 0.9;
+}
+
+.Documentations a:hover::after {
     width: 100%;
 }
 
-.Documentations{
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-}
-
-a{
-    text-decoration: none;
-    color: #f4f4f4;
+.footer p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.85;
 }
