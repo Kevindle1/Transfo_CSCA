@@ -1,11 +1,11 @@
 
 .app{
-    margin: 00;
-    width: 98vw;
+    margin: 0;
+    width: 100%;
     font-family: 'Montserrat';
     height: 100%;
     font-size: 1.5rem;
-    
+
 }
 
 :host ::ng-deep .animate-left {

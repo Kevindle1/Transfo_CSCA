@@ -3,8 +3,8 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
   align-items: stretch;
-  max-height: calc(2 * 34vh + 1vh); 
-  overflow: hidden; 
+  max-height: calc(2 * 34vh + 1vh);
+  overflow-y: auto;
   margin-top: 3vh;
   font-family: 'Montserrat';
 }
@@ -77,25 +77,15 @@
   animation: fadeInUp 0.5s ease-in-out forwards;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .message {
-  width: 100vw;
+  width: 100%;
+  box-sizing: border-box;
   margin-bottom: 2vh;
-  margin-left: 3vw;
-  height: 2vh;
+  padding: 10px 3vw;
   font-size: 1.2rem;
-  color: #333;
-  background-color: aquamarine;
+  color: #308276;
+  background-color: #e8f3f1;
+  border-left: 4px solid #308276;
   opacity: 0;
   animation: fadeIn 0.5s ease-in-out forwards;
 }
@@ -111,7 +101,7 @@
 
 .no-results {
   height: 70vh;
-  width: 90vw;
+  width: 100%;
   color: rgb(141, 0, 0);
   text-align: center;
   font-size: xx-large;

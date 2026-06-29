@@ -37,10 +37,10 @@
   }
   
   .search-bar button:hover {
-    background-color: rgb(48, 130, 118); 
+    background-color: #26695f;
   }
-  
+
   .search-bar button:active {
-    background-color: rgb(48, 130, 118); 
+    background-color: #1f574f;
   }
   
