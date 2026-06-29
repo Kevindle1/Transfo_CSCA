@@ -1,10 +1,7 @@
 import { Client } from './models/client.model';
 import { Component, OnInit } from '@angular/core';
 import { CsvService } from './services/csv.service';
-import { ToastrService } from 'ngx-toastr'; 
-import { AuthService } from './services/auth.service';
-import { LogService } from './services/LogService'; 
-import { APP_CONFIG } from './app-config';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -20,43 +17,12 @@ export class AppComponent implements OnInit {
   searchPerformed: boolean = false;
 
   constructor(
-    private csvService: CsvService, 
-    private authService: AuthService, 
-    private toastr: ToastrService, 
-    private logService: LogService 
+    private csvService: CsvService,
+    private toastr: ToastrService
   ) {}
 
-  ngOnInit() { 
-    this.initiateLogin();  
-    this.loadClients(); 
-  }
-
-  // Lancer la connexion au démarrage
-  private initiateLogin(): void {
-    this.authService.login().subscribe({
-      next: (response) => {
-        console.log('Token:', response.token);  // Vérifier si le token est bien reçu
-      },
-      error: (error) => {
-        //this.toastr.error('Échec de la connexion');
-        this.sendLog('Échec de la connexion', 'ERROR');
-        console.error('Erreur lors de la connexion:', error);
-      }
-    });
-  }
-
-  // Envoi de logs avec niveau de criticité et message personnalisé
-  private sendLog(message: string, level: 'INFO' | 'ERROR' = 'INFO') {
-    this.logService.sendLog(message, level).subscribe({
-      next: () => {
-        if (level === 'INFO') {
-          // Log Info géré avec succès
-        }
-      },
-      error: () => {
-        // Erreur lors de l'envoi du log
-      },
-    });
+  ngOnInit() {
+    this.loadClients();
   }
 
   // Méthode pour charger les clients
@@ -72,14 +38,12 @@ export class AppComponent implements OnInit {
           },
           error: () => {
             this.isLoading = false;
-            //this.toastr.error('Erreur lors du chargement des clients');
-            this.sendLog('Erreur lors du chargement des clients', 'ERROR');
+            console.error('Erreur lors du chargement des clients');
           }
         });
     } catch (error) {
       this.isLoading = false;
-      //this.toastr.error('Erreur inattendue lors du chargement des clients');
-      this.sendLog('Erreur inattendue lors du chargement des clients', 'ERROR');
+      console.error('Erreur inattendue lors du chargement des clients', error);
     }
   }
 
@@ -98,7 +62,7 @@ export class AppComponent implements OnInit {
       this.searchPerformed = true;
     } catch (error) {
       this.toastr.error('Erreur lors de la recherche');
-      this.sendLog('Erreur lors de la recherche', 'ERROR'); 
+      console.error('Erreur lors de la recherche', error);
     }
   }
 
@@ -106,8 +70,7 @@ export class AppComponent implements OnInit {
     try {
       this.selectedPerson = person;
     } catch (error) {
-      //this.toastr.error('Erreur lors de la sélection du client');
-      this.sendLog('Erreur lors de la sélection du client'); 
+      console.error('Erreur lors de la sélection du client', error);
     }
   }
 

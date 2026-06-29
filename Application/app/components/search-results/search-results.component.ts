@@ -1,8 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Client } from '../../models/client.model';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '../../services/auth.service';
-import { LogService } from '../../services/LogService';
 
 @Component({
   selector: 'app-search-results',
@@ -21,9 +19,7 @@ export class SearchResultsComponent implements OnInit, OnChanges {
   noResults: boolean = false; // Indicateur d'absence de résultats
 
   constructor(
-    private toastr: ToastrService,
-    private authService: AuthService,
-    private logService: LogService
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -33,7 +29,7 @@ export class SearchResultsComponent implements OnInit, OnChanges {
     } catch {
       const errorMessage = 'Erreur lors de l\'initialisation du composant SearchResultsComponent.';
       this.toastr.error(errorMessage, 'Erreur d\'initialisation');
-      this.sendLog(errorMessage, 'ERROR');
+      console.error(errorMessage);
     }
   }
 
@@ -45,7 +41,7 @@ export class SearchResultsComponent implements OnInit, OnChanges {
     } catch {
       const errorMessage = 'Erreur lors de la détection des changements dans les résultats de recherche.';
       this.toastr.error(errorMessage, 'Erreur de changement');
-      this.sendLog(errorMessage, 'ERROR');
+      console.error(errorMessage);
     }
   }
 
@@ -55,7 +51,7 @@ export class SearchResultsComponent implements OnInit, OnChanges {
     } catch {
       const errorMessage = 'Erreur lors du calcul du nombre total de pages.';
       this.toastr.error(errorMessage, 'Erreur de pagination');
-      this.sendLog(errorMessage, 'ERROR');
+      console.error(errorMessage);
     }
   }
 
@@ -67,7 +63,7 @@ export class SearchResultsComponent implements OnInit, OnChanges {
     } catch {
       const errorMessage = 'Erreur lors de l\'extraction des résultats paginés.';
       this.toastr.error(errorMessage, 'Erreur d\'affichage');
-      this.sendLog(errorMessage, 'ERROR');
+      console.error(errorMessage);
       return [];
     }
   }
@@ -75,10 +71,10 @@ export class SearchResultsComponent implements OnInit, OnChanges {
   selectPerson(person: Client) {
     try {
       this.personSelect.emit(person);
-      this.sendLog(`Personne sélectionnée : ${person.nom}`, 'INFO');
+      console.log(`Personne sélectionnée : ${person.nom}`);
     } catch {
       const errorMessage = 'Erreur lors de la sélection du client.';
-      this.sendLog(errorMessage, 'ERROR');
+      console.error(errorMessage);
     }
   }
 
@@ -89,12 +85,12 @@ export class SearchResultsComponent implements OnInit, OnChanges {
       } else {
         const errorMessage = `Page invalide : ${page}. Total pages : ${this.totalPages}.`;
         this.toastr.warning(errorMessage, 'Changement de page invalide');
-        this.sendLog(errorMessage, 'ERROR');
+        console.error(errorMessage);
       }
     } catch {
       const errorMessage = 'Erreur lors du changement de page.';
       this.toastr.error(errorMessage, 'Erreur de pagination');
-      this.sendLog(errorMessage, 'ERROR');
+      console.error(errorMessage);
     }
   }
 
@@ -121,20 +117,8 @@ export class SearchResultsComponent implements OnInit, OnChanges {
     } catch {
       const errorMessage = `Erreur lors de la recherche avec le terme "${event.term}" et le type "${event.type}".`;
       this.toastr.error(errorMessage, 'Erreur de recherche');
-      this.sendLog(errorMessage, 'ERROR');
+      console.error(errorMessage);
     }
   }
 
-  private sendLog(message: string, level: 'INFO' | 'ERROR' = 'INFO') {
-    this.logService.sendLog(message, level).subscribe({
-      next: () => {
-        if (level === 'ERROR') {
-          this.toastr.error('Une erreur a été enregistrée dans les logs', 'Erreur');
-        }
-      },
-      error: () => {
-        this.toastr.error('Impossible d\'envoyer le log.', 'Erreur de log');
-      }
-    });
-  }
 }

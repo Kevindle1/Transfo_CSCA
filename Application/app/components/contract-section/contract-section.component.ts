@@ -3,7 +3,6 @@ import { Client } from '../../models/client.model';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr'; 
 import { APP_CONFIG } from 'src/app/app-config';
-import { LogService } from '../../services/LogService';
 
 @Component({
   selector: 'app-contract-section',
@@ -28,9 +27,8 @@ export class ContractSectionComponent implements OnInit {
   advantages = APP_CONFIG['advantages'];
 
   constructor(
-    private router: Router, 
-    private toastr: ToastrService,
-    private logService: LogService
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -42,16 +40,9 @@ export class ContractSectionComponent implements OnInit {
         this.updateTotalPrice(this.propositionsToShow[this.propositionsToShow.length - 1]);
       }
     } catch (error) {
-      this.sendLog('Erreur lors de l\'initialisation des contrats de la personne');
+      console.error('Erreur lors de l\'initialisation des contrats de la personne');
     }
   }
-
-   // Envoi de logs avec niveau de criticité et message personnalisé
-  private sendLog(message: string, level: 'INFO' | 'ERROR' = 'INFO') {
-    this.logService.sendLog(message, level).subscribe({
-    });
-  }
-
 
   private initPersonDetails(): void {
     try {
@@ -65,7 +56,7 @@ export class ContractSectionComponent implements OnInit {
         this.isSecuriTresorerieActive = false;
       }
     } catch (error) {
-      this.sendLog('Erreur lors de l\'initialisation des détails de la personne');
+      console.error('Erreur lors de l\'initialisation des détails de la personne');
     }
   }
 
@@ -82,7 +73,7 @@ export class ContractSectionComponent implements OnInit {
       return (cotisationOGS_A + cotisationOGS_Carte) / 12;
       
     } catch (error) {
-      this.sendLog('Erreur lors du calcul du prix actuel mensuel');
+      console.error('Erreur lors du calcul du prix actuel mensuel');
       return 0;
     }
   }
@@ -92,7 +83,7 @@ export class ContractSectionComponent implements OnInit {
       const propositionPrice = this.getTotalPrice(proposition);
       return propositionPrice - this.prixActuelMensuel;
     } catch (error) {
-      this.sendLog('Erreur lors du calcul de la différence de prix');
+      console.error('Erreur lors du calcul de la différence de prix');
       return 0;
     }
   }
@@ -103,7 +94,7 @@ export class ContractSectionComponent implements OnInit {
       const difference = this.getTotalPrice(proposition) - this.prixActuelMensuel;
       return difference >= 0 ? '+' : '';
     } catch (error) {
-      this.sendLog('Erreur lors du calcul du signe de la différence');
+      console.error('Erreur lors du calcul du signe de la différence');
       return '';
     }
   }
@@ -150,7 +141,7 @@ export class ContractSectionComponent implements OnInit {
             this.isSecuriTresorerieActive = false;
         }
     } catch (error) {
-      this.sendLog('Erreur lors du changement du montant du découvert');
+      console.error('Erreur lors du changement du montant du découvert');
     }
   }
 
@@ -167,7 +158,7 @@ export class ContractSectionComponent implements OnInit {
             }
         }
     } catch (error) {
-      this.sendLog('Erreur lors de la mise à jour du montant du découvert');
+      console.error('Erreur lors de la mise à jour du montant du découvert');
     }
   }
 
@@ -192,7 +183,7 @@ export class ContractSectionComponent implements OnInit {
           return 3;
         }
       } catch (error) {
-        this.sendLog('Erreur lors du calcul du prix de Sécuri Trésorerie');
+        console.error('Erreur lors du calcul du prix de Sécuri Trésorerie');
         return 0;
       }
     }
@@ -212,7 +203,7 @@ export class ContractSectionComponent implements OnInit {
       totalPrice += secuTresPrice;
       return totalPrice;
     } catch (error) {
-      this.sendLog('Erreur lors du calcul du prix total');
+      console.error('Erreur lors du calcul du prix total');
       return 0;
     }
   }
@@ -225,7 +216,7 @@ export class ContractSectionComponent implements OnInit {
         const totalPrice = this.getTotalPrice(proposition);
       }
     } catch (error) {
-      this.sendLog('Erreur lors de la mise à jour du prix total');
+      console.error('Erreur lors de la mise à jour du prix total');
     }
   }
 
@@ -248,7 +239,7 @@ export class ContractSectionComponent implements OnInit {
     try {
       this.close.emit();
     } catch (error) {
-      this.sendLog('Erreur lors de la fermeture de la section de contrat');
+      console.error('Erreur lors de la fermeture de la section de contrat');
     }
   }
 
@@ -257,7 +248,7 @@ export class ContractSectionComponent implements OnInit {
     try {
       this.goBack.emit();
     } catch (error) {
-      this.sendLog('Erreur lors du retour en arrière', 'ERROR');
+      console.error('Erreur lors du retour en arrière');
     }
   }
 
@@ -266,7 +257,7 @@ export class ContractSectionComponent implements OnInit {
     try {
       return this.advantages[proposition] || [];
     } catch (error) {
-      this.sendLog('Erreur lors de la récupération des avantages pour la proposition');
+      console.error('Erreur lors de la récupération des avantages pour la proposition');
       return [];
     }
   }
