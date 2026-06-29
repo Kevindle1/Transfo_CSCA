@@ -1,0 +1,11 @@
+<div class="search-bar">
+  <select [(ngModel)]="searchType">
+    <option value="nomPartenaire">Nom Partenaire</option>
+    <option value="groupeAgences">Agence</option>
+    <option value="dav">DAV</option>
+    <option value="conseiller">Conseiller</option>
+  </select>
+  <input [(ngModel)]="searchTerm" (keyup)="onKeyUp($event)" placeholder="Rechercher..." />
+  <button (click)="onSearch()">Rechercher</button>
+</div>
+  

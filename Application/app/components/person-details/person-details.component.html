@@ -1,0 +1,22 @@
+<div class="person-details">
+  <!-- Bouton de fermeture -->
+  <button class="close-button" (click)="onClose()">Fermer X</button>
+
+  <!-- Container des sections -->
+  <div class="section-container">
+    <!-- Affiche les informations du client -->
+    <app-information
+      *ngIf="currentSection === 'informations'"
+      [person]="person"
+      (goToSection)="showSection($event)">
+    </app-information>
+
+    <!-- Affiche la section des propositions de contrat -->
+    <app-contract-section
+      *ngIf="currentSection === 'proposition-contrat'"
+      [person]="person"
+      (close)="onClose()"
+      (goBack)="onGoBack()">
+    </app-contract-section>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="user-guide">
+  <h2>Guide d'Utilisation</h2>
+  <p>Bienvenue dans l'application de Premiumisation. Suivez ces étapes pour utiliser pleinement toutes les fonctionnalités :</p>
+
+  <div class="steps-container">
+    <div *ngFor="let step of guideConfig.steps">
+      <div class="step">
+        <div class="step-number">{{ step.number }}</div>
+        <div class="step-content">
+          <h3>{{ step.title }}</h3>
+          <p>{{ step.content }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

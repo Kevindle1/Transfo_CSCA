@@ -1,0 +1,71 @@
+<div class="contract-section">
+  <button class="back-button" (click)="onGoBack()">Retour</button>
+
+  <section *ngIf="person">
+    <div class="contrat">
+      <h2 class="section-title">Proposition Contrat pour {{ person.nomPartenaire | uppercase }}</h2>
+
+      <div class="proposition-list">
+        <div class="proposition-item" *ngFor="let proposition of propositionsToShow; let i = index" [ngClass]="{'recommended': i === 1}">
+          <div class="proposition-titre">{{ proposition }}</div>
+
+          <div *ngIf="i === 1" class="recommended-badge">
+            Offre recommandée
+          </div>
+
+          <div class="detail-list">
+            <div class="detail-item">
+              <img [src]="getImageForProposition(proposition)" alt="Carte {{ proposition }}" class="card-image" />
+              <div class="avantage-list">
+                <h3>Avantages</h3>
+                <ul>
+                  <li class="avantage-item" *ngFor="let avantage of getAdvantagesForProposition(proposition)">
+                    {{ avantage }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="option">
+              <h2 class="title-option">Option & Découvert</h2>
+              <div class="securi">
+                <form class="decouvert" (submit)="handleSubmit($event)">
+                  <label>
+                    <strong>Montant découvert autorisé:</strong>
+                    <input class="number" type="number" [(ngModel)]="inputOverdraft" name="overdraft" (change)="handleInputChange($event)" />
+                  </label>
+                  <button class="submit-button" type="submit">Valider</button>
+                </form>
+            
+              </div>
+              <div class="debitdif" >
+                <input type="checkbox" [(ngModel)]="isSecuriTresorerieActive" (change)="updateTotalPrice(proposition)" id="securiTresorerieCheckbox" [disabled]="overdraft === 0" />
+                <label for="securiTresorerieCheckbox">Activer Sécuri Trésorerie</label> <br>
+              </div>
+              <div class="debitdif" *ngIf="isRightOffer(proposition)">
+
+                <input type="checkbox" [(ngModel)]="isDebitDiffered" (change)="updateTotalPrice(proposition)" id="debitDifferedCheckbox" />
+                <label for="debitDifferedCheckbox">Carte à débit différé *</label>
+                <p class="mention">* Profitez de 30% de réduction la première année. Décochez simplement pour voir le tarif de l'année suivante. </p>
+              </div>
+            </div>
+
+            <div class="tarif" (mouseenter)="showTooltip = true" (mouseleave)="showTooltip = false">
+              <p class="total-price">
+                {{ getTotalPrice(proposition).toFixed(2) }}€/mois
+              </p>
+                <p class="difference">
+                  {{ getDifferenceSign(proposition) }}{{ getDifferenceWithCurrentPrice(proposition).toFixed(2) }} €
+                </p>
+  
+              <div *ngIf="showTooltip" class="tooltip">
+                Ecart entre tarif proposé et votre tarif actuel.
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="https://mabanqueduquotidien.credit-agricole.fr/ca-toulouse31/PUC/accueil" target="_blank">Quelle offre correspond à vos usages ?</a>
+      </div>
+    </div>
+  </section>
+</div>

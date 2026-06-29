@@ -1,0 +1,43 @@
+<h1>Informations</h1>
+
+<!-- Section contenant les informations client -->
+<div class="information-list">
+  <div class="information-item">
+    <h2>Client</h2>
+    <p><strong>Nom:</strong> {{ person?.nomPartenaire }}</p>
+    <p><strong>Nom DAV:</strong> {{ person?.nomPartenaireDav }}</p>
+    <p><strong>Âge:</strong> {{ person?.age }}</p>
+  </div>
+
+  <!-- Section contenant les informations sur le compte -->
+  <div class="information-item">
+    <h2>Compte</h2>
+    <p><strong>Compte OGS:</strong> {{ person?.compteOgs }}</p>
+    <p><strong>Type de Compte:</strong> {{ person?.typeDav }}</p>
+    <p><strong>DAV:</strong> {{ person?.dav }}</p>
+    <p><strong>ID Part:</strong> {{ person?.idPart }}</p>
+    <p><strong>Niveau Carte:</strong> {{ person?.niveauCarte }}</p>
+    <p><strong>Nombre de Cartes:</strong> {{ person?.nbCartesCompte }}</p>
+  </div>
+
+  <!-- Section contenant les informations de l'agence -->
+  <div class="information-item">
+    <h2>Agence</h2>
+    <p><strong>Agence:</strong> {{ person?.agenceGestionnaire }}</p>
+    <p><strong>Conseiller:</strong> {{ person?.conseiller }}</p>
+  </div>
+
+  <!-- Section contenant les informations financières -->
+  <div class="information-item">
+    <h2>Finances</h2>
+    <p><strong>Cotisation Annuelle:</strong> {{ person?.cotisationOgsA }} €</p>
+    <p><strong>Cotisation Carte:</strong> {{ person?.cotisationOgsCarte }} €</p>
+    <p><strong>Montant Plafond OCC:</strong> {{ person?.mtPlfdOcc }} €</p>
+    <p><strong>Épargne Hors DAV:</strong> {{ person?.epargneTtHorsDav }} €</p>
+  </div>
+</div>
+
+<!-- Bouton pour afficher les propositions de contrat -->
+<div class="btn">
+  <button (click)="showSection('proposition-contrat')">Visualiser les propositions</button>
+</div>

@@ -1,0 +1,27 @@
+<!-- app.component.html -->
+<app-header></app-header>
+
+<div class="app-content">
+  <app-search-bar (search)="onSearch($event)"></app-search-bar>
+
+  <!-- Afficher le guide utilisateur si aucune recherche n'a été effectuée -->
+  <app-user-guide *ngIf="!searchPerformed"></app-user-guide>
+
+  <!-- Afficher les résultats de recherche si une recherche a été effectuée -->
+ <!-- Assurez-vous que cette condition est vraie -->
+ <app-search-results
+ *ngIf="searchPerformed && filteredResults.length > 0"
+ [results]="filteredResults"
+ (personSelect)="onPersonSelect($event)">
+</app-search-results>
+
+
+  <!-- Afficher les détails de la personne sélectionnée -->
+  <app-person-details
+    *ngIf="selectedPerson"
+    [person]="selectedPerson"
+    (close)="onClosePersonDetails()">
+  </app-person-details>
+</div>
+
+<app-footer></app-footer>

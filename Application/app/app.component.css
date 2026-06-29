@@ -1,0 +1,36 @@
+
+.app{
+    margin: 00;
+    width: 98vw;
+    font-family: 'Montserrat';
+    height: 100%;
+    font-size: 1.5rem;
+    
+}
+
+:host ::ng-deep .animate-left {
+    animation: slideInLeft 0.5s forwards;
+  }
+  
+:host ::ng-deep .animate-right {
+  animation: slideInRight 0.5s forwards;
+}
+  
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+  
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+  

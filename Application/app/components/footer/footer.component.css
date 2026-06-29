@@ -1,0 +1,21 @@
+
+.footer{
+    background-color: #308276;
+    bottom: 0;
+    color: #f4f4f4;
+    left: 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
+
+.Documentations{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+a{
+    text-decoration: none;
+    color: #f4f4f4;
+}

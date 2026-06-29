@@ -1,0 +1,118 @@
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: stretch;
+  max-height: calc(2 * 34vh + 1vh); 
+  overflow: hidden; 
+  margin-top: 3vh;
+  font-family: 'Montserrat';
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.client {
+  flex: 0 0 30%; 
+  box-sizing: border-box;
+  min-height: 20vh;
+  padding: 10px;
+  margin-bottom: 4vh;
+  border: 1px solid #f4f4f4;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeInUp 0.5s ease-in-out;
+  
+}
+
+.client:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+  background-color: #f4f4f4;
+}
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3vh;
+}
+
+.pagination button {
+  margin: 0 10px;
+  padding: 5px 10px;
+  border-radius: 2px;
+  border: none;
+  background-color: #308276;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.pagination button:disabled {
+  background-color: #f4f4f4;
+  cursor: not-allowed;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #26695f; 
+  transform: scale(1.1);
+}
+
+.pagination span {
+  margin: 0 10px;
+}
+
+.paginatedResults {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message {
+  width: 100vw;
+  margin-bottom: 2vh;
+  margin-left: 3vw;
+  height: 2vh;
+  font-size: 1.2rem;
+  color: #333;
+  background-color: aquamarine;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.no-results {
+  height: 70vh;
+  width: 90vw;
+  color: rgb(141, 0, 0);
+  text-align: center;
+  font-size: xx-large;
+}

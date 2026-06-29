@@ -1,0 +1,28 @@
+<div class="results" *ngIf="results.length > 0 || message">
+  <!-- Affichage du message au-dessus des résultats -->
+  <div *ngIf="message" class="message">
+    {{ message }}
+  </div>
+
+  <!-- Affichage des clients -->
+  <div *ngFor="let client of paginatedResults" class="client" (click)="selectPerson(client)">
+    <h1>{{ client.nomPartenaire }}</h1>
+    <p><strong>Nom DAV:</strong> {{ client.nomPartenaireDav }}</p>
+    <p><strong>Type de Compte:</strong> {{ client.typeDav }}</p>
+    <p><strong>DAV:</strong> {{ client.dav }}</p>
+    <p><strong>Agence:</strong> {{ client.agenceGestionnaire }}</p>
+    <p><strong>Conseiller:</strong> {{ client.conseiller }}</p>
+  </div>
+</div>
+
+<!-- Pagination -->
+<div class="pagination" *ngIf="results.length > 0">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">Précédent</button>
+  <span>Page {{ currentPage }} sur {{ totalPages }}</span>
+  <button (click)="changePage(currentPage + 1)" [disabled]="currentPage === totalPages">Suivante</button>
+</div>
+
+<!-- Message lorsque aucun résultat n'est trouvé -->
+<div *ngIf="noResults " class="no-results">
+  Aucun résultat trouvé pour cette recherche.
+</div>
