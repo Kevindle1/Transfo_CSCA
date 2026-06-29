@@ -49,7 +49,7 @@ export class SearchBarComponent {
           return false;
         }
         break;
-      case 'agenceGestionnaire':
+      case 'groupeAgences':
         this.searchTerm = this.searchTerm.replace(/'/g, ' '); // Retire les apostrophes
         if (!/^[a-zA-Z\s]*$/.test(this.searchTerm)) {
           this.toastr.error("L'agence ne doit contenir que des lettres.");
